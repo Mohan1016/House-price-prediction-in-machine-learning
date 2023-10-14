@@ -7,18 +7,24 @@ import seaborn as sns
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
+# Summary statistics of the dataset
 df = pd.read_csv('House price Dataset.csv')
 print(df.head())
 print(df.describe())
+# Check for missing values
 print(df.isnull().sum())
 sns.pairplot(df)
+# Correlation matrix to understand feature relationships
 correlation_matrix = df.corr()
 sns.heatmap(correlation_matrix, annot=True, cmap='jet')
 plt.title("Correlation Matrix")
 plt.show()
+# Preprocessing: Selecting features and target variable
 X = df[['Area','BHK','Bathroom','Parking']]
 y = df['Price']
+#Splitting the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+# Building the Linear Regression Model
 model = LinearRegression()
 print(X_train.isnull().sum())
 print(y_train.isnull().sum())
